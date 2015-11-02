@@ -1,0 +1,21 @@
+{
+  "name": "parkimoto-frontend",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "hotdiggitydoddo <hotdiggitydoddo@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/hotdiggitydoddo/parkimoto.com",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.7"
+  }
+}
