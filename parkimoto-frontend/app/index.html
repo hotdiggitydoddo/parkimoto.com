@@ -26,9 +26,10 @@
     <link type="text/css" rel="stylesheet" href="template/neko-framework/external-plugins/external-plugins.min.css">
     <link type="text/css" rel="stylesheet" href="template/neko-framework/css/layout/neko-framework-layout.css">
     <link type="text/css" rel="stylesheet" id="color" href="template/neko-framework/css/color/neko-framework-color.css">
-
+    <link rel="stylesheet" href="/vendor/angular-toastr.css" type="text/css" />
     <link type="text/css" rel="stylesheet" href="css/custom.css">
 
+   
     <!-- Favicons ================================================== -->
     <link rel="shortcut icon" href="images/favicon.ico">
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
@@ -472,44 +473,46 @@
                                 <h1 class="text-light" data-nekoanim="fadeIn" data-nekodelay="1200">takes time, planning, and careful thought.</h1>
                                 <h2 class="text-light" data-nekoanim="fadeIn" data-nekodelay="3000">Thank you for your patience while our site is brought to life!</h2>
                                 <span style="display:block; padding-top: 10px"><i class="icon-glyph-52 circle" style="background-color: #FFFFFF; color: #c8ae7a;border-color: #D6B676;" data-nekoanim="fadeIn" data-nekodelay="4000"></i></span>
-                                <h2 class="text-light" data-nekoanim="fadeIn" data-nekodelay="4500">For inquiries or booking info, call -- 626.278.5385</h2>
-                                <!--<a class="mt btn default btn-lg" data-nekoanim="fadeIn" data-nekodelay="4000">For questions or booking info - click here</a>-->
+                                <a href="#contact-section" class="mt btn default btn-lg" data-nekoanim="fadeIn" data-nekodelay="4000">For questions or booking info - click here</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <canvas style="pointer-events:none;" id="animated-bubble"></canvas>
             </section>
-            <!--<section class="pt-medium light-color section-fw" ng-controller="ContactCtrl" ng-cloak>-->
-            <!--<div class="container-fw">-->
-            <!--    <div class="row">-->
-            <!--        <div class="col-md-3"></div>-->
-            <!--        <div class="col-md-6 padding-small form-minimal">-->
-            <!--            <form method="post" id="contactfrm" role="form" class="box padding-medium">-->
-            <!--                <div class="form-group">-->
-            <!--                    <label for="name">Name</label>-->
-            <!--                    <input type="text" class="form-control" ng-model="contact.name" name="name" id="name" placeholder="Enter name" title="Please enter your name (at least 2 characters)" />-->
-            <!--                    <div class="form-line"></div>-->
-            <!--                </div>-->
-            <!--                <div class="form-group">-->
-            <!--                    <label for="email">Email</label>-->
-            <!--                    <input type="email" class="form-control" ng-model="contact.email" name="email" id="email" placeholder="Enter email" title="Please enter a valid email address" />-->
-            <!--                    <div class="form-line"></div>-->
-            <!--                </div>-->
-            <!--                <div class="form-group">-->
-            <!--                    <label for="comments">Comments</label>-->
-            <!--                    <textarea name="comment" class="form-control" ng-model="contact.body" id="comments" cols="3" rows="5" placeholder="Enter your message…" title="Please enter your message (at least 10 characters)"></textarea>-->
-            <!--                    <div class="form-line"></div>-->
-            <!--                </div>-->
-            <!--                <div class="result"></div>-->
-            <!--                <div class="text-center">-->
-            <!--                    <button name="submit" type="submit" ng-click="save(contact)" class="btn btn-lg btn-primary" id="submit">Submit</button>-->
-            <!--                </div>-->
-            <!--            </form>-->
-            <!--        </div>-->
-            <!--    </div>-->
-            <!--</div>-->
-            <!--</section>-->
+            <section class="pt-medium light-color section-fw" ng-controller="ContactCtrl" ng-cloak>
+                <div class="container-fw">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6 padding-small form-minimal">
+                            <form id="contact-form" role="form" class="box padding-medium" ng-submit="submitContactForm()">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" ng-model="contactForm.name" name="name" id="name" placeholder="Enter name" title="Please enter your name (at least 2 characters)" />
+                                    <div class="form-line"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" ng-model="contactForm.email" name="email" id="email" placeholder="Enter email" title="Please enter a valid email address" />
+                                    <div class="form-line"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="comments">Comments</label>
+                                    <textarea name="comment" class="form-control" ng-model="contactForm.body" id="comments" cols="3" rows="5" placeholder="Enter your message…" title="Please enter your message (at least 10 characters)"></textarea>
+                                    <div class="form-line"></div>
+                                </div>
+                                <div class="result"></div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-lg btn-primary">
+                                        <span ng-show="!contactForm.loading">Submit</span>
+                                        <span ng-show="contactForm.loading">Please wait...</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 
@@ -528,7 +531,7 @@
     <!--            </div>-->
     <!--        </div>-->
     <!--    </div>-->
-    
+
     <!--</section>-->
 
     <!-- / content -->
@@ -593,13 +596,24 @@
     <script type="application/javascript" src="template/neko-framework/external-plugins/external-plugins.min.js"></script>
     <!-- neko framework script -->
     <script type="text/javascript" src="template/neko-framework/js/neko-framework.js"></script>
-
+    <script type="text/javascript" src="vendor/angular-animate.js"></script>
+    <script type="text/javascript" src="vendor/angular-toastr.tpls.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="ContactCtrl.js"></script>
     <script>
-        $(document).ready(function() {
-            // $("#contact-btn").attr("style", "")    
-        });
+        $('a[href*=#]:not([href=#])').click(function() {
+            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: target.offset().top
+                    }, 1000);
+                    return false;
+                }
+            }
+        })
     </script>
 </body>
 

@@ -1,1 +1,1 @@
-angular.module('parkimotoApp', ['toastr', 'compareTo']);
+var parkimotoApp = angular.module('parkimotoApp', ['ngAnimate', 'toastr']);
