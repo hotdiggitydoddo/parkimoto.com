@@ -22,3 +22,13 @@ module.exports = {
   // }
 
 };
+
+module.exports.email = {
+  service: 'Gmail',
+  auth: {
+    user: 'hotdiggitydoddo@gmail.com',
+    pass: 'kewlio16'
+  },
+  from: 'no-reply@test.com',
+  testMode: false
+}

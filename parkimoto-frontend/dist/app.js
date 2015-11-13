@@ -1,1 +1,1 @@
-var parkimotoApp = angular.module('parkimotoApp', ['ngAnimate', 'toastr']);
+var parkimotoApp = angular.module('parkimotoApp', ['ngAnimate', 'toastr', 'ngMessages']);

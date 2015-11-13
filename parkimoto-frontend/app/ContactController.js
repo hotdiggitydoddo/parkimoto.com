@@ -1,4 +1,4 @@
-parkimotoApp.controller('ContactCtrl', ['$scope', '$http', 'toastr', function($scope, $http, toastr) {
+parkimotoApp.controller('ContactController', ['$scope', '$http', 'toastr', function($scope, $http, toastr) {
 
     $scope.contactForm = {
         loading: false
@@ -7,7 +7,7 @@ parkimotoApp.controller('ContactCtrl', ['$scope', '$http', 'toastr', function($s
     $scope.submitContactForm = function() {
         $scope.contactForm.loading = true;
         
-        $http.post('/api/contactus', {
+        $http.post('/api/contact/send', {
             contactForm: $scope.contactForm
         })
         .then(function onSuccess() {
@@ -23,5 +23,4 @@ parkimotoApp.controller('ContactCtrl', ['$scope', '$http', 'toastr', function($s
             $scope.contactForm.loading = false;
         })
     };
-
 }]);

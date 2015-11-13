@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="/vendor/angular-toastr.css" type="text/css" />
     <link type="text/css" rel="stylesheet" href="css/custom.css">
 
-   
+
     <!-- Favicons ================================================== -->
     <link rel="shortcut icon" href="images/favicon.ico">
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
@@ -480,30 +480,39 @@
                 </div>
                 <canvas style="pointer-events:none;" id="animated-bubble"></canvas>
             </section>
-            <section class="pt-medium light-color section-fw" ng-controller="ContactCtrl" ng-cloak>
+            <section class="pt-medium light-color section-fw" id="contact-section" ng-controller="ContactController" ng-cloak>
                 <div class="container-fw">
                     <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-6 padding-small form-minimal">
-                            <form id="contact-form" role="form" class="box padding-medium" ng-submit="submitContactForm()">
-                                <div class="form-group">
+                            <form id="contact-form" role="form" name="userForm" class="box padding-medium" ng-submit="submitContactForm()" novalidate>
+                                <div class="form-group" ng-class="{ 'has-error': userForm.name.$touched && userForm.name.$invalid }">
                                     <label for="name">Name</label>
-                                    <input type="text" class="form-control" ng-model="contactForm.name" name="name" id="name" placeholder="Enter name" title="Please enter your name (at least 2 characters)" />
+                                    <input type="text" class="form-control" ng-model="contactForm.name" ng-minlength="2" ng-maxlength="25" required name="name" placeholder="Enter name" title="Please enter your name (at least 2 characters)" />
+                                     <div class="help-block" ng-messages="userForm.name.$error" ng-if="userForm.name.$touched">
+                                        <div ng-messages-include="error-messages.html"></div>
+                                    </div>
                                     <div class="form-line"></div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{ 'has-error': userForm.email.$touched && userForm.email.$invalid }">
                                     <label for="email">Email</label>
-                                    <input type="email" class="form-control" ng-model="contactForm.email" name="email" id="email" placeholder="Enter email" title="Please enter a valid email address" />
+                                    <input type="email" class="form-control" ng-model="contactForm.email" ng-minlength="6" ng-maxlength="40" required name="email" placeholder="Enter email" title="Please enter a valid email address" />
+                                    <div class="help-block" ng-messages="userForm.email.$error" ng-if="userForm.email.$touched">
+                                        <div ng-messages-include="error-messages.html"></div>
+                                    </div>
                                     <div class="form-line"></div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{ 'has-error': userForm.body.$touched && userForm.body.$invalid }">
                                     <label for="comments">Comments</label>
-                                    <textarea name="comment" class="form-control" ng-model="contactForm.body" id="comments" cols="3" rows="5" placeholder="Enter your message…" title="Please enter your message (at least 10 characters)"></textarea>
+                                    <textarea name="body" class="form-control" ng-model="contactForm.body" ng-minlength="10" cols="3" required rows="5" placeholder="Enter your message…" title="Please enter your message (at least 10 characters)"></textarea>
+                                     <div class="help-block" ng-messages="userForm.body.$error" ng-if="userForm.body.$touched">
+                                        <div ng-messages-include="error-messages.html"></div>
+                                    </div>
                                     <div class="form-line"></div>
                                 </div>
                                 <div class="result"></div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-lg btn-primary">
+                                    <button type="submit" ng-disabled="userForm.$invalid" class="btn btn-lg btn-primary">
                                         <span ng-show="!contactForm.loading">Submit</span>
                                         <span ng-show="contactForm.loading">Please wait...</span>
                                     </button>
@@ -598,8 +607,9 @@
     <script type="text/javascript" src="template/neko-framework/js/neko-framework.js"></script>
     <script type="text/javascript" src="vendor/angular-animate.js"></script>
     <script type="text/javascript" src="vendor/angular-toastr.tpls.js"></script>
+    <script type="text/javascript" src="vendor/angular-messages.js"></script>
     <script type="text/javascript" src="app.js"></script>
-    <script type="text/javascript" src="ContactCtrl.js"></script>
+    <script type="text/javascript" src="ContactController.js"></script>
     <script>
         $('a[href*=#]:not([href=#])').click(function() {
             if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
