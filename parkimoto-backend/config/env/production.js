@@ -35,4 +35,13 @@ module.exports = {
   //   level: "silent"
   // }
 
+    service: 'Gmail',
+    auth: {
+      user: 'parkimotoevents@gmail.com',
+      pass: 'superfun'
+    },
+    from: 'no-reply@test.com',
+    testMode: false
+  
+
 };
