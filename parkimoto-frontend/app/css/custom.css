@@ -343,3 +343,8 @@ width:200px;
 .navbar-brand {
     padding: 6.5px 0;
 }
+
+#splash-page-contact-wrapper {
+	background-color: white;
+	text-align: left;
+}

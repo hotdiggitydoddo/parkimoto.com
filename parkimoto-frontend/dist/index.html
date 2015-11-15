@@ -472,7 +472,7 @@
                                 <h1 class="x-large text-light" data-nekoanim="fadeInUp" data-nekodelay="200">Every special event</h1>
                                 <h1 class="text-light" data-nekoanim="fadeIn" data-nekodelay="1200">takes time, planning, and careful thought.</h1>
                                 <h2 class="text-light" data-nekoanim="fadeIn" data-nekodelay="3000">Thank you for your patience while our site is brought to life!</h2>
-                                <span style="display:block; padding-top: 10px"><i class="icon-glyph-52 circle" style="background-color: #FFFFFF; color: #c8ae7a;border-color: #D6B676;" data-nekoanim="fadeIn" data-nekodelay="4000"></i></span>
+                                <span style="display:block; padding-top: 10px"><i class="icon-heart light-color circle" border-color: #D6B676;" data-nekoanim="fadeIn" data-nekodelay="4000"></i></span>
                                 <a href="#contact-section" class="mt btn default btn-lg" data-nekoanim="fadeIn" data-nekodelay="4000">For questions or booking info - click here</a>
                             </div>
                         </div>
@@ -481,43 +481,65 @@
                 <canvas style="pointer-events:none;" id="animated-bubble"></canvas>
             </section>
             <section class="pt-medium light-color section-fw" id="contact-section" ng-controller="ContactController" ng-cloak>
-                <div class="container-fw">
-                    <div class="row">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-6 padding-small form-minimal">
-                            <form id="contact-form" role="form" name="userForm" class="box padding-medium" ng-submit="submitContactForm()" novalidate>
-                                <div class="form-group" ng-class="{ 'has-error': userForm.name.$touched && userForm.name.$invalid }">
+                <div class="col-md-6 col-md-offset-3 text-center animated-invisible animated fadeInUp animated-visible" data-nekoanim="fadeInUp">
+					<div class="box light-color">
+						<i class="icon-mail large animated circle"></i>
+						<h2>Contact Us</h2>
+						<h3>ph: 626.278.5385</h3>
+						<p class="mb">
+						Comments, inquiries, or want to book an event?  We'd love to hear from you!
+						</p>
+					<div class="form-minimal" id="splash-page-contact-wrapper">
+					     <form id="contact-form" role="form" name="userForm" class="box padding-medium" ng-submit="submitContactForm()" novalidate>
+                                <div class="form-group" ng-class="{ 'has-error': contactForm.formSubmitted && userForm.name.$invalid || userForm.name.$touched && userForm.name.$invalid }">
                                     <label for="name">Name</label>
                                     <input type="text" class="form-control" ng-model="contactForm.name" ng-minlength="2" ng-maxlength="25" required name="name" placeholder="Enter name" title="Please enter your name (at least 2 characters)" />
-                                     <div class="help-block" ng-messages="userForm.name.$error" ng-if="userForm.name.$touched">
+                                    <div class="help-block" ng-messages="userForm.name.$error" ng-if="userForm.name.$touched || contactForm.formSubmitted">
                                         <div ng-messages-include="error-messages.html"></div>
                                     </div>
                                     <div class="form-line"></div>
                                 </div>
-                                <div class="form-group" ng-class="{ 'has-error': userForm.email.$touched && userForm.email.$invalid }">
+                                <div class="form-group" ng-class="{ 'has-error': contactForm.formSubmitted && userForm.email.$invalid || userForm.email.$touched && userForm.email.$invalid }">
                                     <label for="email">Email</label>
                                     <input type="email" class="form-control" ng-model="contactForm.email" ng-minlength="6" ng-maxlength="40" required name="email" placeholder="Enter email" title="Please enter a valid email address" />
-                                    <div class="help-block" ng-messages="userForm.email.$error" ng-if="userForm.email.$touched">
+                                    <div class="help-block" ng-messages="userForm.email.$error" ng-if="userForm.email.$touched || contactForm.formSubmitted">
                                         <div ng-messages-include="error-messages.html"></div>
                                     </div>
                                     <div class="form-line"></div>
                                 </div>
-                                <div class="form-group" ng-class="{ 'has-error': userForm.body.$touched && userForm.body.$invalid }">
+                                <div class="form-group" ng-class="{ 'has-error': contactForm.formSubmitted && userForm.body.$invalid || userForm.body.$touched && userForm.body.$invalid }">
                                     <label for="comments">Comments</label>
                                     <textarea name="body" class="form-control" ng-model="contactForm.body" ng-minlength="10" cols="3" required rows="5" placeholder="Enter your message…" title="Please enter your message (at least 10 characters)"></textarea>
-                                     <div class="help-block" ng-messages="userForm.body.$error" ng-if="userForm.body.$touched">
+                                    <div class="help-block" ng-messages="userForm.body.$error" ng-if="userForm.body.$touched || contactForm.formSubmitted">
                                         <div ng-messages-include="error-messages.html"></div>
                                     </div>
                                     <div class="form-line"></div>
                                 </div>
                                 <div class="result"></div>
+                                <div class="pb text-center" vc-recaptcha theme="'light'" key="key" on-create="setWidgetId(widgetId)" on-success="setResponse(response)" on-expire="cbExpiration()"></div>
                                 <div class="text-center">
-                                    <button type="submit" ng-disabled="userForm.$invalid" class="btn btn-lg btn-primary">
+                                    <button type="submit" class="btn btn-lg btn-primary">
                                         <span ng-show="!contactForm.loading">Submit</span>
                                         <span ng-show="contactForm.loading">Please wait...</span>
                                     </button>
                                 </div>
                             </form>
+					</div>
+					</div>
+				</div>
+                
+                
+                
+                
+                
+                
+                
+                
+                <div class="container-fw">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6 padding-small form-minimal">
+                           
                         </div>
                     </div>
                 </div>
@@ -604,10 +626,12 @@
     <!-- external framework plugins -->
     <script type="application/javascript" src="template/neko-framework/external-plugins/external-plugins.min.js"></script>
     <!-- neko framework script -->
+    <script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit" async defer></script>
     <script type="text/javascript" src="template/neko-framework/js/neko-framework.js"></script>
     <script type="text/javascript" src="vendor/angular-animate.js"></script>
     <script type="text/javascript" src="vendor/angular-toastr.tpls.js"></script>
     <script type="text/javascript" src="vendor/angular-messages.js"></script>
+    <script type="text/javascript" src="vendor/angular-recaptcha.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="ContactController.js"></script>
     <script>
